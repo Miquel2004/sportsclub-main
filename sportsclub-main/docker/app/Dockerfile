@@ -25,5 +25,17 @@ COPY sportsclub/ .
 # Collect static files (needed when serving through a reverse proxy)
 RUN python manage.py collectstatic --noinput
 
+# --- TAREA 1: SEGURETAT ---
+# Creem l'usuari sense privilegis
+RUN useradd -m appuser
+
+# Canviem el propietari de la carpeta /app a l'usuari nou
+# Com que a la línia 10 has posat WORKDIR /app, fem servir /app aquí
+RUN chown -R appuser:appuser /app
+
+# Indiquem que s'executi com a appuser i no com a root
+USER appuser
+
+
 # Run uvicorn
 CMD ["uvicorn", "sportsclub.asgi:application", "--host", "0.0.0.0", "--port", "8080"]

@@ -1,0 +1,29 @@
+services:
+  app-blue:
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+    restart: always
+    ports: []
+    env_file:
+      - .env.production
+
+  app-green:
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+    restart: always
+    ports: []
+    env_file:
+      - .env.production
+
+  postgres:
+    restart: always
+    ports: []
+    env_file:
+      - .env.production
+
+  nginx:
+    restart: always
+    ports:
+      - "80:80"
