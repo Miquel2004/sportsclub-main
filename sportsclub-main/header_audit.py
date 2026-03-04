@@ -1,5 +1,4 @@
 import requests
-import sys
 
 # The target URL
 # URL = "https://github.com/"
@@ -18,7 +17,6 @@ try:
     response = requests.get(URL)
     print(f"Scanning {URL}")
     print(f"Status: {response.status_code}\n")
-    
     score = 0
     max_score = len(REQUIRED_HEADERS)
 
