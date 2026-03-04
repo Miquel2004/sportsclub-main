@@ -22,7 +22,6 @@ try:
 
     for header, expected_value in REQUIRED_HEADERS.items():
         value = response.headers.get(header)
-        
         if value:
             # Check if value roughly matches expectation
             if expected_value in value:
