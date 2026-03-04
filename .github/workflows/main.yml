@@ -2,25 +2,25 @@ name: CI/CD Sportsclub
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main" ] # Se activa al hacer 'git push' a la rama main
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3 # Descarga tu código en el servidor de GitHub
 
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          username: ${{ secrets.DOCKER_USERNAME }} # Usa el secreto mikiipower
+          password: ${{ secrets.DOCKER_PASSWORD }} # Usa tu token de Docker Hub
 
       - name: Build and Push
         uses: docker/build-push-action@v4
         with:
-          context: .
-          file: docker/app/Dockerfile
+          context: ./sportsclub-main # Ruta corregida para que encuentre la carpeta
+          file: ./sportsclub-main/docker/app/Dockerfile # Ruta corregida al Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/sportsclub-app:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/sportsclub-app:latest # Sube la imagen a tu perfil
