@@ -1,11 +1,19 @@
 name: Security Scan
-on: [push]
+
+on:
+  push:
+    branches: [ "main" ]
+
 jobs:
   audit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
+
       - name: Install pip-audit
         run: pip install pip-audit
+
       - name: Scan requirements
-        run: pip-audit -r requirements.txt
+        # Añadimos la ruta correcta al archivo
+        run: pip-audit -r sportsclub-main/requirements.txt
